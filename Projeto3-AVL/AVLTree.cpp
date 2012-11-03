@@ -47,9 +47,9 @@ Folha* AVLTree::insereRecursivamente(Folha* folha, int valor) {
         Folha *newFolha = new Folha(valor);
         folha->folhaDir = newFolha;
     } else if (folha->valor > valor) {
-        insereRecursivamente(folha->folhaEsq, valor);
+        folha->folhaEsq = insereRecursivamente(folha->folhaEsq, valor);
     } else if (folha->valor < valor) {
-        insereRecursivamente(folha->folhaDir, valor);
+        folha->folhaDir = insereRecursivamente(folha->folhaDir, valor);
     }
     return atualizaFatorCarga(folha);
 }
@@ -60,10 +60,8 @@ Folha* AVLTree::atualizaFatorCarga(Folha* folha) {
     if (folha->fatorCarga == 2) {
         if (folha->folhaDir->fatorCarga > 0) {
             folha = rotacionaParaEsquerda(folha);
-            //verificar como atualizar fatorCarga
         } else {
             folha = rotacaoDuplaEsquerda(folha);
-            //verificar como atualizar fatorCarga
         }
     } else if (folha->fatorCarga == -2) {
         if (folha->folhaEsq->fatorCarga < 0) {
@@ -129,7 +127,7 @@ int AVLTree::calculaAltura(Folha* folha) {
         return 0;
     }
     if (folha->folhaDir == NULL && folha->folhaEsq == NULL) {
-        altura = 0;
+        altura = 1;
     } else if (folha->folhaDir == NULL && folha->folhaEsq != NULL) {
         altura = calculaAltura(folha->folhaEsq) + 1;
     } else if (folha->folhaDir != NULL && folha->folhaEsq == NULL) {
