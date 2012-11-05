@@ -18,23 +18,23 @@ int main(int argc, char** argv) {
     
     AVLTree *arvore = new AVLTree();
     arvore->add(1);
-    arvore->printTree(arvore->raiz);
+    arvore->printTree();
     cout << endl;
     arvore->add(2);
-    arvore->printTree(arvore->raiz);
+    arvore->printTree();
     cout << endl;
     arvore->add(3);
-    arvore->printTree(arvore->raiz);
+    arvore->printTree();
     cout << endl;
     arvore->add(4);
-    arvore->printTree(arvore->raiz);
+    arvore->printTree();
     cout << endl;
     arvore->add(5);
-    arvore->printTree(arvore->raiz);
+    arvore->printTree();
     cout << endl;
-    //arvore->add(15);
-    //arvore->add(11);
-   // arvore->printTree(arvore->raiz);
+    arvore->busca(5);
+    cout << endl;
+
 
     return 0;
 }

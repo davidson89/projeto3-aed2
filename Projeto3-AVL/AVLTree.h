@@ -14,14 +14,14 @@ using namespace std;
 class AVLTree {
 public:
     AVLTree();
-    Folha *raiz;
     void add(int valor);
     void remove(int valor);
-    bool busca(int valor);
-    void printTree(Folha *folh); 
+    void busca(int valor);
+    void printTree(); 
     AVLTree(const AVLTree& orig);
     virtual ~AVLTree();
 private:
+    Folha *raiz;
     void criaRaiz(int valor);
     Folha* insereRecursivamente(Folha *folha, int valor);
     Folha* rotacionaParaDireita(Folha *folha);
@@ -29,6 +29,8 @@ private:
     Folha* rotacaoDuplaDireita(Folha *folha);
     Folha* rotacaoDuplaEsquerda(Folha *folha);
     Folha* atualizaFatorCarga(Folha *folha);
+    void findValue(Folha *folha, int valor);
+    void printPreOrdem(Folha *folha);
     int calculaAltura(Folha *folha);
 
 };
