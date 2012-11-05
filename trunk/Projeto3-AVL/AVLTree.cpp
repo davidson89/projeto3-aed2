@@ -23,12 +23,32 @@ void AVLTree::add(int valor) {
     }
 }
 
-void AVLTree::printTree(Folha *folha) {
+void AVLTree::busca(int valor) {
+    findValue(this->raiz, valor);
+}
+
+void AVLTree::findValue(Folha* folha, int valor) {
+    if (folha->valor > valor) {
+        cout << folha->valor << ";";
+        findValue(folha->folhaEsq, valor);
+    } else if (folha->valor < valor) {
+        cout << folha->valor << ";";
+        findValue(folha->folhaDir, valor);
+    } else {
+        cout << folha->valor;
+    }
+}
+
+void AVLTree::printTree() {
+    printPreOrdem(this->raiz);
+}
+
+void AVLTree::printPreOrdem(Folha *folha) {
     if (folha != NULL) {
         cout << "{" << folha->valor << ",";
-        printTree(folha->folhaEsq);
+        printPreOrdem(folha->folhaEsq);
         cout << ",";
-        printTree(folha->folhaDir);
+        printPreOrdem(folha->folhaDir);
         cout << "}";
     } else {
         cout << "{}";
