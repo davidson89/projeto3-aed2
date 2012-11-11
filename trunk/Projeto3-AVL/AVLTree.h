@@ -32,6 +32,7 @@ private:
     void findValue(Folha *folha, int valor);
     void printPreOrdem(Folha *folha);
     int calculaAltura(Folha *folha);
+    void DeletePosOrdem(Folha *no);
 
 };
 

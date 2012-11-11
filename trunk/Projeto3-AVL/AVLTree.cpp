@@ -166,10 +166,20 @@ int AVLTree::calculaAltura(Folha* folha) {
     return altura;
 
 }
+void AVLTree:: DeletePosOrdem(Folha *no){
+    if(no != NULL){
+        DeletePosOrdem(no->folhaEsq);
+        DeletePosOrdem(no->folhaDir);
+        delete no;
+        
+    }
+}
+
 
 AVLTree::AVLTree(const AVLTree& orig) {
 }
 
 AVLTree::~AVLTree() {
+    DeletePosOrdem(this->raiz);
 }
 
