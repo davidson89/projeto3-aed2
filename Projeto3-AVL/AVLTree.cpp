@@ -28,7 +28,8 @@ void AVLTree::busca(int valor) {
 }
 
 void AVLTree::findValue(Folha* folha, int valor) {
-    if (folha->valor > valor) {
+	if(folha == NULL)return;
+	if (folha->valor > valor) {
         cout << folha->valor << ";";
         findValue(folha->folhaEsq, valor);
     } else if (folha->valor < valor) {
