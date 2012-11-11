@@ -8,6 +8,8 @@
 #include <cstdlib>
 #include <iostream>
 #include "AVLTree.h"
+#include <fstream>
+#include <stdio.h>
 
 using namespace std;
 
@@ -15,26 +17,37 @@ using namespace std;
  * 
  */
 int main(int argc, char** argv) {
-    
-    AVLTree *arvore = new AVLTree();
-    arvore->add(1);
-    arvore->printTree();
-    cout << endl;
-    arvore->add(2);
-    arvore->printTree();
-    cout << endl;
-    arvore->add(3);
-    arvore->printTree();
-    cout << endl;
-    arvore->add(4);
-    arvore->printTree();
-    cout << endl;
-    arvore->add(5);
-    arvore->printTree();
-    cout << endl;
-    arvore->busca(5);
-    cout << endl;
-
+  char *filename =argv[1];
+	FILE *arq = fopen(filename, "r");
+   
+	if (arq == NULL) {
+        cout << "Nao foi possivel encontrar o arquivo " << endl;
+          return 0;
+    }
+	 AVLTree *arvore = new AVLTree();
+	string line="";
+	char comando;
+	int valor = 0;
+	while(!feof(arq)){
+        fscanf(arq, "%s", &comando); 
+		fscanf(arq, "%d", &valor); 
+		
+		if ( comando == 'i')
+		{
+			cout << "> " << comando <<  " " << valor<< endl;
+			arvore->add(valor);
+		    arvore->printTree();
+			cout << endl;
+		}  
+		if ( comando == 'b')
+		{
+			
+			cout << "> " << comando <<  " " << valor<< endl;
+			arvore->busca(valor);
+			cout << endl;
+			
+		} 
+	}
 
     return 0;
 }
