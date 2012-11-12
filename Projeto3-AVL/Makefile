@@ -1,4 +1,3 @@
-FLAGS = -ansi -pedantic -Wall -g -efence
 CLASSES = main.cpp AVLTree.cpp Folha.cpp
 
 # regra principal
@@ -15,6 +14,7 @@ clean:
 	rm -f *.o lab3
 
 doxygen:
-	g++ ${FLAGS} -o lab3d ${CLASSES}
 	doxygen -g
+	sed -i 's/EXTRACT_PRIVATE        = NO/EXTRACT_PRIVATE        = YES/g' Doxyfile
 	doxygen
+	@echo "\n***** Diretório html criado, contendo toda documentação das classes *****\n"
