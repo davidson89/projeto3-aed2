@@ -9,7 +9,6 @@ int main(int argc, char** argv) {
     FILE *arq = fopen(filename, "r");  
     if (arq == NULL) {
         cout << "Nao foi possivel encontrar o arquivo." << endl;
-        delete filename;
         return 0;
     }
     AVLTree *arvore = new AVLTree();
