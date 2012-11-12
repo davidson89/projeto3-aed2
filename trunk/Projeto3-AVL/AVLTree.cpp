@@ -4,17 +4,19 @@
 
 using namespace std;
 
-/* AVLTree
+/**
+ *  AVLTree
  * Construtor. Faz o ponteiro para a raiz da árvore apontar para nulo.
- */
+ **/
 AVLTree::AVLTree() {
     this->raiz = NULL;
 }
 
-/* add
+/**
+ * add
  * Verifica se a raiz aponta para NULL. Se a raiz for NULL então ele cria uma nova raiz, senão apenas faz a inserção.
  * @param valor a ser inserido na árvore.
- */
+ **/
 void AVLTree::add(int valor) {
     if (this->raiz == NULL) {
         criaRaiz(valor);
@@ -23,19 +25,21 @@ void AVLTree::add(int valor) {
     }
 }
 
-/* busca
+/**
+ * busca
  * Verifica se um valor está na árvore através do método findValue.
  * @param valor a ser procurado na árvore.
- */
+ **/
 void AVLTree::busca(int valor) {
     findValue(this->raiz, valor);
 }
 
-/* findValue
+/**
+ * findValue
  * Método recursivo que percorre a árvore em busca de um valor, imprimindo o caminho percorrido.
  * @param folha, objeto da classe Folha (raiz da árvore/subárvore).
  * @param valor, valor a ser procurado na árvore.
- */
+ **/
 void AVLTree::findValue(Folha* folha, int valor) {
     if (folha == NULL) return;
     if (folha->valor > valor) {
@@ -49,17 +53,19 @@ void AVLTree::findValue(Folha* folha, int valor) {
     }
 }
 
-/* printTree
+/**
+ * printTree
  * Imprime a estrutura da árvore. Para realizar a imprissão, esse método invoca o método recursivo printPreOrdem.
- */
+ **/
 void AVLTree::printTree() {
     printPreOrdem(this->raiz);
 }
 
-/* printPreOrdem
+/**
+ * printPreOrdem
  * Imprime a estrutura da árvore recursivamente a partir do nó passado como raiz.
  * @param folha, o objeto raiz da árvore.
- */
+ **/
 void AVLTree::printPreOrdem(Folha *folha) {
     if (folha != NULL) {
         cout << "(" << folha->valor << ",";
@@ -72,20 +78,22 @@ void AVLTree::printPreOrdem(Folha *folha) {
     }
 }
 
-/* criaRaiz
+/**
+ * criaRaiz
  * Cria o primeiro nó da árvore (Objeto da classe Folha).
  * @param folha, o objeto raiz da árvore.
- */
+ **/
 void AVLTree::criaRaiz(int valor) {
     this->raiz = new Folha(valor);
 }
 
-/* insereRecursivamente
+/**
+ * insereRecursivamente
  * Percorre a árvore recursivamente para encontrar o local certo onde o valor deve ser inserido.
  * @param no raz da árvore.
  * @param valor a ser inserido na árvore.
  * @return raiz da árvore ou subárvore.
- */
+ **/
 Folha* AVLTree::insereRecursivamente(Folha* folha, int valor) {
     if (folha->valor > valor && folha->folhaEsq == NULL) {
         Folha *newFolha = new Folha(valor);
@@ -101,11 +109,12 @@ Folha* AVLTree::insereRecursivamente(Folha* folha, int valor) {
     return atualizaFatorCarga(folha);
 }
 
-/* atualizaFatorCarga
+/**
+ * atualizaFatorCarga
  * Método responsável por manter a estrutura da AVL. Ele atualiza o fator de carga do nó e realiza as devidas rotações caso seja necessário.
  * @param raiz da árvore.
  * @return raiz da árvore.
- */
+ **/
 Folha* AVLTree::atualizaFatorCarga(Folha* folha) {
     folha->fatorCarga = calculaAltura(folha->folhaDir) - calculaAltura(folha->folhaEsq);
     if (folha->fatorCarga == 2) {
@@ -124,11 +133,12 @@ Folha* AVLTree::atualizaFatorCarga(Folha* folha) {
     return folha;
 }
 
-/* rotacionaParaDireita
+/**
+ * rotacionaParaDireita
  * Rotaciona a árvore para a direita.
  * @param raiz da árvore.
  * @return raiz da árvore.
- */
+ **/
 Folha* AVLTree::rotacionaParaDireita(Folha* folha) {
     Folha* folha2 = folha->folhaEsq;
     if (folha2->folhaDir) folha->folhaEsq = folha2->folhaDir;
@@ -137,11 +147,12 @@ Folha* AVLTree::rotacionaParaDireita(Folha* folha) {
     return folha2;
 }
 
-/* rotacionaParaEsquerda
+/**
+ * rotacionaParaEsquerda
  * Rotaciona a árvore para a esquedar.
  * @param raiz da árvore.
  * @return raiz da árvore.
- */
+ **/
 Folha* AVLTree::rotacionaParaEsquerda(Folha* folha) {
     Folha* folha2 = folha->folhaDir;
     if (folha2->folhaEsq) folha->folhaDir = folha2->folhaEsq;
@@ -150,11 +161,12 @@ Folha* AVLTree::rotacionaParaEsquerda(Folha* folha) {
     return folha2;
 }
 
-/* rotacaoDuplaDireita
+/**
+ * rotacaoDuplaDireita
  * Faz rotação dupla da árvore para a direita.
  * @param raiz da árvore.
  * @return raiz da árvore.
- */
+ **/
 Folha* AVLTree::rotacaoDuplaDireita(Folha* folha) {
     Folha* folha1 = folha->folhaEsq;
     Folha* folha2 = folha1->folhaDir;
@@ -167,11 +179,12 @@ Folha* AVLTree::rotacaoDuplaDireita(Folha* folha) {
     return folha2;
 }
 
-/* rotacaoDuplaEsquerda
+/**
+ * rotacaoDuplaEsquerda
  * Faz rotação dupla da árvore para a esquerda.
  * @param raiz da árvore.
  * @return raiz da árvore.
- */
+ **/
 Folha* AVLTree::rotacaoDuplaEsquerda(Folha* folha) {
     Folha* folha3 = folha->folhaDir;
     Folha* folha2 = folha3->folhaEsq;
@@ -184,11 +197,12 @@ Folha* AVLTree::rotacaoDuplaEsquerda(Folha* folha) {
     return folha2;
 }
 
-/* calculaAltura
+/**
+ * calculaAltura
  * Percorre a árvore recursivamente partindo da raiz até chegar ao último nó folha calculando a sua altura.
  * @param raiz da árvore.
  * @return retorna o tamanho da árvore.
- */
+ **/
 int AVLTree::calculaAltura(Folha* folha) {
     int altura = 0;
     if (folha == NULL) {
@@ -213,10 +227,11 @@ int AVLTree::calculaAltura(Folha* folha) {
     return altura;
 }
 
-/* deletePosOrdem
+/**
+ * deletePosOrdem
  * Percorre a árvore recursivamente a partir do nó raiz e apaga todos os objetos da classe Folha.
  * @param no, raiz da árvore.
- */
+ **/
 void AVLTree::deletePosOrdem(Folha *no) {
     if (no != NULL) {
         deletePosOrdem(no->folhaEsq);
@@ -225,9 +240,10 @@ void AVLTree::deletePosOrdem(Folha *no) {
     }
 }
 
-/* Destrutor.
+/**
+ * Destrutor.
  * Invoca o método deletePosOrdem que desaloca os objetos da classe Folha.
- */
+ **/
 AVLTree::~AVLTree() {
     deletePosOrdem(this->raiz);
 }
