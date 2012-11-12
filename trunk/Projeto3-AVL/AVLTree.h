@@ -1,24 +1,13 @@
-/* 
- * File:   AVLTree.h
- * Author: davidson
- *
- * Created on 31 de Outubro de 2012, 22:34
- */
-
 #ifndef AVLTREE_H
 #define	AVLTREE_H
 #include "Folha.h"
-
-using namespace std;
 
 class AVLTree {
 public:
     AVLTree();
     void add(int valor);
-    void remove(int valor);
     void busca(int valor);
-    void printTree(); 
-    AVLTree(const AVLTree& orig);
+    void printTree();
     virtual ~AVLTree();
 private:
     Folha *raiz;
@@ -32,9 +21,7 @@ private:
     void findValue(Folha *folha, int valor);
     void printPreOrdem(Folha *folha);
     int calculaAltura(Folha *folha);
-    void DeletePosOrdem(Folha *no);
-
+    void deletePosOrdem(Folha *no);
 };
 
 #endif	/* AVLTREE_H */
-

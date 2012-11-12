@@ -1,15 +1,8 @@
-/* 
- * File:   AVLTree.cpp
- * Author: davidson
- * 
- * Created on 31 de Outubro de 2012, 22:34
- */
-
 #include <stddef.h>
-
-#include "AVLTree.h"
-#include "Folha.h"
 #include <iostream>
+#include "AVLTree.h"
+
+using namespace std;
 
 AVLTree::AVLTree() {
     this->raiz = NULL;
@@ -28,8 +21,8 @@ void AVLTree::busca(int valor) {
 }
 
 void AVLTree::findValue(Folha* folha, int valor) {
-	if(folha == NULL)return;
-	if (folha->valor > valor) {
+    if (folha == NULL) return;
+    if (folha->valor > valor) {
         cout << folha->valor << ";";
         findValue(folha->folhaEsq, valor);
     } else if (folha->valor < valor) {
@@ -46,13 +39,13 @@ void AVLTree::printTree() {
 
 void AVLTree::printPreOrdem(Folha *folha) {
     if (folha != NULL) {
-        cout << "{" << folha->valor << ",";
+        cout << "(" << folha->valor << ",";
         printPreOrdem(folha->folhaEsq);
         cout << ",";
         printPreOrdem(folha->folhaDir);
-        cout << "}";
+        cout << ")";
     } else {
-        cout << "{}";
+        cout << "()";
     }
 }
 
@@ -77,7 +70,6 @@ Folha* AVLTree::insereRecursivamente(Folha* folha, int valor) {
 
 Folha* AVLTree::atualizaFatorCarga(Folha* folha) {
     folha->fatorCarga = calculaAltura(folha->folhaDir) - calculaAltura(folha->folhaEsq);
-
     if (folha->fatorCarga == 2) {
         if (folha->folhaDir->fatorCarga > 0) {
             folha = rotacionaParaEsquerda(folha);
@@ -164,22 +156,16 @@ int AVLTree::calculaAltura(Folha* folha) {
         }
     }
     return altura;
-
 }
-void AVLTree:: DeletePosOrdem(Folha *no){
-    if(no != NULL){
-        DeletePosOrdem(no->folhaEsq);
-        DeletePosOrdem(no->folhaDir);
+
+void AVLTree::deletePosOrdem(Folha *no) {
+    if (no != NULL) {
+        deletePosOrdem(no->folhaEsq);
+        deletePosOrdem(no->folhaDir);
         delete no;
-        
     }
 }
 
-
-AVLTree::AVLTree(const AVLTree& orig) {
-}
-
 AVLTree::~AVLTree() {
-    DeletePosOrdem(this->raiz);
+    deletePosOrdem(this->raiz);
 }
-
